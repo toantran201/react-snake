@@ -1,17 +1,26 @@
+import { memo } from 'react'
+//
+import {
+  BLOCK_HEIGHT,
+  BLOCK_WIDTH,
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+} from '@/contstants/constants'
+
 const Wall = () => {
   const renderWall = () => {
     const arr = []
-    for (let i = 0; i < 28; i++) {
-      for (let j = 0; j < 16; j++) {
+    for (let i = 0; i < SCREEN_WIDTH / BLOCK_WIDTH; i++) {
+      for (let j = 0; j < SCREEN_HEIGHT / BLOCK_HEIGHT; j++) {
         arr.push(
           <div
             key={`${i * 10}${j * 10}`}
             className="wall"
             style={{
-              width: 25,
-              height: 25,
-              left: i * 25,
-              top: j * 25,
+              width: BLOCK_WIDTH,
+              height: BLOCK_HEIGHT,
+              left: i * BLOCK_WIDTH,
+              top: j * BLOCK_HEIGHT,
             }}
           />
         )
@@ -24,4 +33,4 @@ const Wall = () => {
   return <>{renderWall()}</>
 }
 
-export default Wall
+export default memo(Wall)
