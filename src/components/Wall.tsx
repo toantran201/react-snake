@@ -7,8 +7,8 @@ import {
   SCREEN_WIDTH,
 } from '@/contstants/constants'
 
-const Wall = () => {
-  const renderWall = () => {
+const Walls = () => {
+  const renderWalls = () => {
     const arr = []
     for (let i = 0; i < SCREEN_WIDTH / BLOCK_WIDTH; i++) {
       for (let j = 0; j < SCREEN_HEIGHT / BLOCK_HEIGHT; j++) {
@@ -30,7 +30,7 @@ const Wall = () => {
     return arr
   }
 
-  return <>{renderWall()}</>
+  return <>{renderWalls()}</>
 }
 
-export default memo(Wall)
+export default memo(Walls)

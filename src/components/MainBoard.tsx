@@ -1,4 +1,4 @@
-import Wall from '@/components/Wall/Wall'
+import { Wall } from '@/components'
 
 const MainBoard = () => {
   return (

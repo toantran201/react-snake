@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import PointBoard from '@/components/PointBoard/PointBoard'
-import MainBoard from '@/components/MainBoard/MainBoard'
+import { MainBoard, PointBoard } from '@/components'
 
 function App() {
   useEffect(() => {
@@ -14,7 +13,9 @@ function App() {
     >
       <PointBoard />
       <MainBoard />
-      <button className="bg-glass py-1.5 px-20 font-manrope text-white">Start</button>
+      <button className="bg-glass py-1.5 px-20 font-manrope text-white">
+        Start
+      </button>
     </div>
   )
 }

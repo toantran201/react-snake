@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "styled/styled.css";
+@import "specific/specific.css";
 
 @font-face {
     font-family: 'Manrope-Light';
