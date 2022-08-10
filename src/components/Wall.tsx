@@ -5,7 +5,7 @@ import {
   BLOCK_WIDTH,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
-} from '@/contstants/constants'
+} from '@/constants'
 
 const Walls = () => {
   const renderWalls = () => {

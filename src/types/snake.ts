@@ -1,4 +1,4 @@
-import { DIRECTION } from '@/types/generics'
+import { DIRECTION } from '@/types'
 
 export type SnakeBlock = {
   xPos: number
@@ -9,5 +9,5 @@ export type Snake = {
   blocks: SnakeBlock[]
   startLength: number
   direction: DIRECTION
-  directionChange: boolean
+  isDirectionChanging: boolean
 }
