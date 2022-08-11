@@ -1,11 +1,6 @@
 import { memo } from 'react'
 //
-import {
-  BLOCK_HEIGHT,
-  BLOCK_WIDTH,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
-} from '@/constants'
+import { BLOCK_HEIGHT, BLOCK_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants'
 
 const Walls = () => {
   const renderWalls = () => {

@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .tsx,.ts --ignore .eslintignore",
     "lint:fix": "eslint src/* --fix --ignore-path .eslintignore",
     "prettier": "npx prettier src -check",
-    "prettier:fix": "npx run prettier -- --write"
+    "prettier:fix": "npx run prettier --write src"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",

@@ -16,7 +16,7 @@ const MainBoard = () => {
     const intervalId = setInterval(() => {
       dispatch(moveSnake())
       dispatch(changingDirection(false))
-    }, 70)
+    }, 40)
     setIntervalId(intervalId)
 
     return () => {

@@ -1,32 +1,32 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@import "specific/specific.css";
+@import 'specific/specific.css';
 
 @font-face {
-    font-family: 'Manrope-Light';
-    src: url("src/assets/fonts/Manrope/Manrope-Light.ttf") format('truetype');
+  font-family: 'Manrope-Light';
+  src: url('src/assets/fonts/Manrope/Manrope-Light.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Manrope-Medium';
-    src: url("src/assets/fonts/Manrope/Manrope-Medium.ttf") format('truetype');
+  font-family: 'Manrope-Medium';
+  src: url('src/assets/fonts/Manrope/Manrope-Medium.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Manrope-Semibold';
-    src: url("src/assets/fonts/Manrope/Manrope-SemiBold.ttf") format('truetype');
+  font-family: 'Manrope-Semibold';
+  src: url('src/assets/fonts/Manrope/Manrope-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'Manrope-Bold';
-    src: url("src/assets/fonts/Manrope/Manrope-Bold.ttf") format('truetype');
+  font-family: 'Manrope-Bold';
+  src: url('src/assets/fonts/Manrope/Manrope-Bold.ttf') format('truetype');
 }
 
 @layer base {
-    [data-theme='pink'] {
-        --primary-light: #A91DA3;
-        --primary-dark: #5B0069;
-    }
+  [data-theme='pink'] {
+    --primary-light: #a91da3;
+    --primary-dark: #5b0069;
+  }
 }
