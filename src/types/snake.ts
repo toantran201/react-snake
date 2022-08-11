@@ -10,4 +10,5 @@ export type Snake = {
   startLength: number
   direction: DIRECTION
   isDirectionChanging: boolean
+  isDead: boolean
 }

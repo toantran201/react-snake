@@ -1,3 +1,5 @@
-export { default as Wall } from './Wall'
+export { default as Walls } from './Walls'
 export { default as PointBoard } from './PointBoard'
 export { default as MainBoard } from './MainBoard'
+export { default as Snake } from './Snake'
+export { default as Apple } from './Apple'

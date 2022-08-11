@@ -1,40 +1,43 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 //
-import { Wall } from '@/components'
-import { BLOCK_HEIGHT, BLOCK_WIDTH } from '@/constants'
+import { Apple, Snake, Walls } from '@/components'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import {
-  changeDirection,
-  initSnake,
-  moveSnake,
-  changingDirection,
-} from '@/slices/snake'
+import { ateApple, changeDirection, changingDirection, moveSnake } from '@/slices/character'
 
 const MainBoard = () => {
   const dispatch = useAppDispatch()
-  const snakeContext = useAppSelector((state) => state.snake)
+  const snake = useAppSelector((state) => state.character.snake)
+  const apple = useAppSelector((state) => state.character.apple)
+  const [intervalId, setIntervalId] = useState<NodeJS.Timer | string | number | undefined>()
 
   //
   useEffect(() => {
-    dispatch(initSnake())
-    dispatch(changingDirection(false))
     window.addEventListener('keydown', onKeyDown)
-    return () => {
-      window.removeEventListener('keydown', onKeyDown)
-    }
-  }, [])
-
-  //
-  useEffect(() => {
     const intervalId = setInterval(() => {
       dispatch(moveSnake())
       dispatch(changingDirection(false))
-    }, 100)
+    }, 70)
+    setIntervalId(intervalId)
 
     return () => {
+      window.removeEventListener('keydown', onKeyDown)
       clearInterval(intervalId)
     }
   }, [dispatch])
+
+  //
+  useEffect(() => {
+    if (!snake.blocks || snake.blocks.length === 0) return
+    if (snake.blocks[0].xPos === apple.xPos && snake.blocks[0].yPos === apple.yPos) {
+      dispatch(ateApple())
+    }
+  }, [dispatch, snake.blocks[0], apple.xPos, apple.yPos])
+
+  useEffect(() => {
+    if (snake.isDead) {
+      clearInterval(intervalId)
+    }
+  }, [snake.isDead])
 
   //
   const onKeyDown = (event: KeyboardEvent) => {
@@ -57,23 +60,9 @@ const MainBoard = () => {
 
   return (
     <div className="relative w-[700px] h-[400px] bg-glass flex">
-      <Wall />
-      {snakeContext.blocks.map((item, index) => (
-        <div
-          key={index}
-          className={
-            index === 0
-              ? 'wall bg-primary-dark opacity-70'
-              : 'wall bg-primary-light opacity-70'
-          }
-          style={{
-            width: BLOCK_WIDTH,
-            height: BLOCK_HEIGHT,
-            top: item.yPos,
-            left: item.xPos,
-          }}
-        />
-      ))}
+      <Walls />
+      <Snake />
+      <Apple />
     </div>
   )
 }

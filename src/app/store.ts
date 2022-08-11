@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import snakeReducer from '@/slices/snake/snake-slice'
+import { characterReducer } from '@/slices/character'
 
 export const store = configureStore({
   reducer: {
-    snake: snakeReducer,
+    character: characterReducer,
   },
 })
 
