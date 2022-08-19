@@ -13,7 +13,7 @@ function App() {
     >
       <PointBoard />
       <MainBoard />
-      <button className="py-1.5 px-20 font-manrope transition-all text-white bg-glass hover:bg-primary-light active:bg-primary-dark">Start</button>
+      {/*<button className="py-1.5 px-20 font-manrope transition-all text-white bg-glass hover:bg-primary-light active:bg-primary-dark">Start</button>*/}
     </div>
   )
 }

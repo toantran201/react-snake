@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react'
 import { Apple, Snake, Walls } from '@/components'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { ateApple, changeDirection, changingDirection, moveSnake } from '@/slices/character'
+import { SPEED_STEP } from '@/constants'
 
 const MainBoard = () => {
   const dispatch = useAppDispatch()
   const snake = useAppSelector((state) => state.character.snake)
   const apple = useAppSelector((state) => state.character.apple)
+  const game = useAppSelector((state) => state.character.game)
   const [intervalId, setIntervalId] = useState<NodeJS.Timer | string | number | undefined>()
 
   //
@@ -16,14 +18,14 @@ const MainBoard = () => {
     const intervalId = setInterval(() => {
       dispatch(moveSnake())
       dispatch(changingDirection(false))
-    }, 40)
+    }, Math.floor(200 - game.speed * SPEED_STEP))
     setIntervalId(intervalId)
 
     return () => {
       window.removeEventListener('keydown', onKeyDown)
       clearInterval(intervalId)
     }
-  }, [dispatch])
+  }, [dispatch, game.speed])
 
   //
   useEffect(() => {

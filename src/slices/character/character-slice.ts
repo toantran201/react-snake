@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Apple, DIRECTION, Snake, SnakeBlock } from '@/types'
-import { BLOCK_HEIGHT, BLOCK_WIDTH, DEFAULT_SNAKE_LENGTH, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants'
+import { Apple, DIRECTION, Game, Snake, SnakeBlock } from '@/types'
+import { BLOCK_HEIGHT, BLOCK_WIDTH, DEFAULT_SNAKE_LENGTH, LENGTH_STEP, MAX_SPEED, SCREEN_HEIGHT, SCREEN_WIDTH } from '@/constants'
 
 const initialState: {
   snake: Snake
   apple: Apple
+  game: Game
 } = {
   snake: {
     blocks: [],
@@ -18,6 +19,11 @@ const initialState: {
     height: BLOCK_HEIGHT,
     yPos: 0,
     xPos: 0,
+  },
+  game: {
+    score: 0,
+    speed: 1,
+    length: DEFAULT_SNAKE_LENGTH,
   },
 }
 
@@ -41,7 +47,7 @@ export const characterSlice = createSlice({
   name: 'character',
   initialState,
   reducers: {
-    // Snake
+    // ======================== Snake ======================== //
     initSnake(state, { payload }: { payload?: number }) {
       state.snake.blocks = []
       state.snake.isDead = false
@@ -139,14 +145,22 @@ export const characterSlice = createSlice({
         xPos: blocks[blocks.length - 1].xPos,
         yPos: blocks[blocks.length - 1].yPos,
       }
+      // Ádd snake block
       state.snake.blocks.push(lastBlocks)
+
+      // Change game state
+      state.game.length++
+      state.game.score += state.game.speed
+      if (state.game.length % LENGTH_STEP === 0 && state.game.speed <= MAX_SPEED) state.game.speed++
       setNewApplePosition(state)
     },
 
-    // Apple
+    // ======================== Apple ======================== //
     initApplePosition(state) {
       setNewApplePosition(state)
     },
+
+    // ======================== Game ======================== //
   },
 })
 
