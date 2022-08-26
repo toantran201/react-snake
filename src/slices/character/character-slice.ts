@@ -12,7 +12,6 @@ const initialState: {
     startLength: 0,
     direction: 'RIGHT',
     isDirectionChanging: false,
-    isDead: false,
   },
   apple: {
     width: BLOCK_WIDTH,
@@ -24,6 +23,7 @@ const initialState: {
     score: 0,
     speed: 1,
     length: DEFAULT_SNAKE_LENGTH,
+    isOver: false,
   },
 }
 
@@ -49,8 +49,11 @@ export const characterSlice = createSlice({
   reducers: {
     // ======================== Snake ======================== //
     initSnake(state, { payload }: { payload?: number }) {
+      // Game
+      state.game.isOver = false
+
+      //Snake
       state.snake.blocks = []
-      state.snake.isDead = false
       state.snake.direction = 'RIGHT'
       const snakeLength: number = payload || DEFAULT_SNAKE_LENGTH
       let xPos = SCREEN_WIDTH / 2
@@ -68,19 +71,19 @@ export const characterSlice = createSlice({
     },
 
     moveSnake(state) {
-      if (state.snake.isDead) return
+      if (state.game.isOver) return
+      // Test case snake eat itself
       const blocks = state.snake.blocks
       const blockExceptHead = [...blocks]
       blockExceptHead.splice(0, 1)
 
       const idx = blockExceptHead.findIndex((item) => item.xPos === blocks[0].xPos && item.yPos === blocks[0].yPos)
-
       if (idx > -1) {
-        state.snake.isDead = true
+        state.game.isOver = true
         return
       }
-      let prevXPos = state.snake.blocks[0].xPos
-      let prevYPos = state.snake.blocks[0].yPos
+      let prevXPos = blocks[0].xPos
+      let prevYPos = blocks[0].yPos
 
       // move snake's head
       switch (state.snake.direction) {

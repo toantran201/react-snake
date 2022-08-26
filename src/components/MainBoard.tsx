@@ -11,6 +11,8 @@ const MainBoard = () => {
   const apple = useAppSelector((state) => state.character.apple)
   const game = useAppSelector((state) => state.character.game)
   const [intervalId, setIntervalId] = useState<NodeJS.Timer | string | number | undefined>()
+  const snakeHeadXPos = snake.blocks[0]?.xPos
+  const snakeHeadYPos = snake.blocks[0]?.yPos
 
   //
   useEffect(() => {
@@ -29,17 +31,17 @@ const MainBoard = () => {
 
   //
   useEffect(() => {
-    if (!snake.blocks || snake.blocks.length === 0) return
-    if (snake.blocks[0].xPos === apple.xPos && snake.blocks[0].yPos === apple.yPos) {
+    if (snakeHeadXPos === undefined || snakeHeadYPos === undefined) return
+    if (snakeHeadXPos === apple.xPos && snakeHeadYPos === apple.yPos) {
       dispatch(ateApple())
     }
-  }, [dispatch, snake.blocks[0], apple.xPos, apple.yPos])
+  }, [dispatch, snakeHeadXPos, snakeHeadYPos, apple.xPos, apple.yPos])
 
   useEffect(() => {
-    if (snake.isDead) {
+    if (game.isOver) {
       clearInterval(intervalId)
     }
-  }, [snake.isDead])
+  }, [game.isOver, intervalId])
 
   //
   const onKeyDown = (event: KeyboardEvent) => {
