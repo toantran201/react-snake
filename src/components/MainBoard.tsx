@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 //
 import { Apple, Snake, Walls } from '@/components'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
@@ -15,6 +15,28 @@ const MainBoard = () => {
   const snakeHeadYPos = snake.blocks[0]?.yPos
 
   //
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      switch (event.keyCode) {
+        case 37:
+          dispatch(changeDirection('LEFT'))
+          break
+        case 38:
+          dispatch(changeDirection('UP'))
+          break
+        case 39:
+          dispatch(changeDirection('RIGHT'))
+          break
+        case 40:
+          dispatch(changeDirection('DOWN'))
+          break
+      }
+      dispatch(changingDirection(true))
+    },
+    [dispatch]
+  )
+
+  //
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown)
     const intervalId = setInterval(() => {
@@ -27,7 +49,7 @@ const MainBoard = () => {
       window.removeEventListener('keydown', onKeyDown)
       clearInterval(intervalId)
     }
-  }, [dispatch, game.speed])
+  }, [dispatch, game.speed, onKeyDown])
 
   //
   useEffect(() => {
@@ -42,25 +64,6 @@ const MainBoard = () => {
       clearInterval(intervalId)
     }
   }, [game.isOver, intervalId])
-
-  //
-  const onKeyDown = (event: KeyboardEvent) => {
-    switch (event.keyCode) {
-      case 37:
-        dispatch(changeDirection('LEFT'))
-        break
-      case 38:
-        dispatch(changeDirection('UP'))
-        break
-      case 39:
-        dispatch(changeDirection('RIGHT'))
-        break
-      case 40:
-        dispatch(changeDirection('DOWN'))
-        break
-    }
-    dispatch(changingDirection(true))
-  }
 
   return (
     <div className="relative w-[700px] h-[400px] bg-glass flex">
