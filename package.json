@@ -7,9 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .tsx,.ts --ignore .eslintignore",
-    "lint:fix": "eslint src/* --fix --ignore-path .eslintignore",
-    "prettier": "npx prettier src -check",
-    "prettier:fix": "npx run prettier --write src"
+    "lint:fix": "yarn lint --fix",
+    "prettier": "npx prettier src --check",
+    "prettier:fix": "npx prettier src --write"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
